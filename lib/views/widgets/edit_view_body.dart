@@ -19,15 +19,15 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: CustomAppBar(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: SingleChildScrollView(
+        // ✅ أضف هذا
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 50,
+            ),
+            CustomAppBar(
               onPressed: () {
                 widget.note.title = title ?? widget.note.title;
                 widget.note.subtitle = content ?? widget.note.subtitle;
@@ -38,32 +38,32 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
               title: "Edit Note",
               icon: Icons.check,
             ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          CustomTextField(
+            const SizedBox(
+              height: 50,
+            ),
+            CustomTextField(
+                onChanged: (value) {
+                  title = value;
+                },
+                hint: widget.note.title),
+            const SizedBox(
+              height: 18,
+            ),
+            CustomTextField(
               onChanged: (value) {
-                title = value;
+                content = value;
               },
-              hint: widget.note.title),
-          const SizedBox(
-            height: 18,
-          ),
-          CustomTextField(
-            onChanged: (value) {
-              content = value;
-            },
-            hint: widget.note.subtitle,
-            maxLines: 5,
-          ),
-          const SizedBox(
-            height: 18,
-          ),
-          EditNoteColorsList(
-            note: widget.note,
-          ),
-        ],
+              hint: widget.note.subtitle,
+              maxLines: 5,
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            EditNoteColorsList(
+              note: widget.note,
+            ),
+          ],
+        ),
       ),
     );
   }
